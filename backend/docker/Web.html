@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>使用 Dockerfile + Docker Compose 部署 Web 项目 | 归雁</title>
+    <meta name="generator" content="VuePress 1.9.9">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="description" content="deosiree&#39;s blog">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.e211a165.css" as="style"><link rel="preload" href="/assets/js/app.37ed7473.js" as="script"><link rel="preload" href="/assets/js/3.a7eca6c4.js" as="script"><link rel="preload" href="/assets/js/1.d4cddd66.js" as="script"><link rel="preload" href="/assets/js/14.deee688e.js" as="script"><link rel="preload" href="/assets/js/10.90017dd4.js" as="script"><link rel="prefetch" href="/assets/js/11.04de4d92.js"><link rel="prefetch" href="/assets/js/12.67aeae84.js"><link rel="prefetch" href="/assets/js/13.ea19b661.js"><link rel="prefetch" href="/assets/js/15.61ba4b62.js"><link rel="prefetch" href="/assets/js/16.464835a9.js"><link rel="prefetch" href="/assets/js/17.b041816e.js"><link rel="prefetch" href="/assets/js/18.f448bc21.js"><link rel="prefetch" href="/assets/js/19.371cdb6e.js"><link rel="prefetch" href="/assets/js/20.3f19ffe0.js"><link rel="prefetch" href="/assets/js/21.b0502ba0.js"><link rel="prefetch" href="/assets/js/22.7f56eda9.js"><link rel="prefetch" href="/assets/js/23.2cbbcecf.js"><link rel="prefetch" href="/assets/js/24.7d535cc9.js"><link rel="prefetch" href="/assets/js/25.54d48828.js"><link rel="prefetch" href="/assets/js/26.cc03bca4.js"><link rel="prefetch" href="/assets/js/27.796ae207.js"><link rel="prefetch" href="/assets/js/4.fdc063eb.js"><link rel="prefetch" href="/assets/js/5.a8a921ca.js"><link rel="prefetch" href="/assets/js/6.c39d28a5.js"><link rel="prefetch" href="/assets/js/7.a335f74e.js"><link rel="prefetch" href="/assets/js/8.cf3ea344.js"><link rel="prefetch" href="/assets/js/9.f64f05af.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.e211a165.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container" data-v-7dd95ae2><div data-v-7dd95ae2><div class="password-shadow password-wrapper-out" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>归雁</h3> <p class="description" data-v-59e6cb88>deosiree's blog</p> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><!---->
+          
+        <!---->
+        2023
+      </a></span></div></div> <div class="hide" data-v-7dd95ae2><header class="navbar" data-v-7dd95ae2><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">归雁</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="undefined"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont icon-frontend"></i>
+      前端
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/frontend/vuepress/VuePressOne.html" class="nav-link"><i class="undefined"></i>
+  VuePress
+</a></li></ul></div></div><div class="nav-item"><a href="/backend/docker/preface.html" class="nav-link"><i class="iconfont icon-docker"></i>
+  Docker
+</a></div><div class="nav-item"><a href="/backend/mysql/preface.html" class="nav-link"><i class="iconfont icon-mysql"></i>
+  MySQL
+</a></div><div class="nav-item"><a href="/backend/work/poi.html" class="nav-link"><i class="iconfont icon-work"></i>
+  工作
+</a></div><div class="nav-item"><a href="/backend/microservice/twelve-factor.html" class="nav-link"><i class="iconfont icon-microservice"></i>
+  微服务
+</a></div><div class="nav-item"><a href="/tool/git.html" class="nav-link"><i class="iconfont icon-tools"></i>
+  工具
+</a></div><div class="nav-item"><a href="/message-board.html" class="nav-link"><i class="iconfont reco-suggestion"></i>
+  留言板
+</a></div><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  时间轴
+</a></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-7dd95ae2></div> <aside class="sidebar" data-v-7dd95ae2><div class="personal-info-wrapper" data-v-1fad0c41 data-v-7dd95ae2><img src="/avator.jpg" alt="author-avatar" class="personal-img" data-v-1fad0c41> <!----> <div class="num" data-v-1fad0c41><div data-v-1fad0c41><h3 data-v-1fad0c41>13</h3> <h6 data-v-1fad0c41>文章</h6></div> <div data-v-1fad0c41><h3 data-v-1fad0c41>6</h3> <h6 data-v-1fad0c41>标签</h6></div></div> <ul class="social-links" data-v-1fad0c41><li class="social-item" data-v-1fad0c41><i class="iconfont reco-github" style="color:#3498db;" data-v-1fad0c41></i></li></ul> <hr data-v-1fad0c41></div> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="undefined"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont icon-frontend"></i>
+      前端
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/frontend/vuepress/VuePressOne.html" class="nav-link"><i class="undefined"></i>
+  VuePress
+</a></li></ul></div></div><div class="nav-item"><a href="/backend/docker/preface.html" class="nav-link"><i class="iconfont icon-docker"></i>
+  Docker
+</a></div><div class="nav-item"><a href="/backend/mysql/preface.html" class="nav-link"><i class="iconfont icon-mysql"></i>
+  MySQL
+</a></div><div class="nav-item"><a href="/backend/work/poi.html" class="nav-link"><i class="iconfont icon-work"></i>
+  工作
+</a></div><div class="nav-item"><a href="/backend/microservice/twelve-factor.html" class="nav-link"><i class="iconfont icon-microservice"></i>
+  微服务
+</a></div><div class="nav-item"><a href="/tool/git.html" class="nav-link"><i class="iconfont icon-tools"></i>
+  工具
+</a></div><div class="nav-item"><a href="/message-board.html" class="nav-link"><i class="iconfont reco-suggestion"></i>
+  留言板
+</a></div><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  时间轴
+</a></div> <!----></nav> <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Docker 应用</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/backend/docker/Elasticsearch.html" class="sidebar-link">使用 Docker Compose 部署 Elasticsearch + Kibana</a></li><li><a href="/backend/docker/Web.html" aria-current="page" class="active sidebar-link">使用 Dockerfile + Docker Compose 部署 Web 项目</a></li></ul></section></li></ul> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>使用 Dockerfile + Docker Compose 部署 Web 项目</h3> <!----> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><!---->
+          
+        <!---->
+        2023
+      </a></span></div></div> <div data-v-7dd95ae2><div data-v-7dd95ae2><main class="page"><section style="display:;"><div class="page-title"><h1 class="title">使用 Dockerfile + Docker Compose 部署 Web 项目</h1> <div data-v-8a445198><i class="iconfont reco-account" data-v-8a445198><span data-v-8a445198>Cleaner</span></i> <i class="iconfont reco-date" data-v-8a445198><span data-v-8a445198>2023/6/6</span></i> <i class="iconfont reco-eye" data-v-8a445198><span id="/backend/docker/Web.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-8a445198><a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;"></a></span></i> <i class="tags iconfont reco-tag" data-v-8a445198><span class="tag-item" data-v-8a445198>Docker</span></i></div></div> <div class="theme-reco-content content__default"><blockquote><p>本文主要介绍使用 Dockerfile + Docker Compose 部署完整 Web 项目（包括数据库、后端和前端）的详细步骤。</p> <p>项目是前后端分离的，后端使用 SpringBoot2.7.5 + JDK17 + MySQL 8；前端使用 Vue + webpack。服务器是跑在 WSL2 上的 Ubuntu 20.04.5</p></blockquote> <h2 id="服务器目录结构"><a href="#服务器目录结构" class="header-anchor">#</a> 服务器目录结构</h2> <div class="language- line-numbers-mode"><pre class="language-text"><code>—— root
+  |—— mall  // 根目录
+      |—— pack 
+          |—— back // 后端
+              |-- Dockerfile // 构建镜像的文本文件
+              |-- core-0.0.1-SNAPSHOT.jar
+              |-- deploy.sh     // 用来将 jar 包复制到服务器上的脚本文件
+              |-- docker-compose.yaml       // 启动容器
+          |—— web // 前端
+              |-- Dockerfile
+              |-- dist
+              |-- deploy.sh     // 用来将 dist 文件夹复制到服务器上的脚本文件
+              |-- docker-compose.yaml       // 启动容器
+              |-- nginx.conf    // nginx 配置文件
+          |—— jdk // jdk 环境
+              |-- Dockerfile    // 用来构建 JDK 镜像
+              |-- jdk-17.0.5_linux-x64_bin.tar.gz   // JDK
+              |-- jdk-17.0.5    // jdk-17.0.5_linux-x64_bin.tar.gz 解压后的文件夹
+      |—— mysql // 数据库(以下三个目录，启动 MySQL 容器时自动创建)
+          |-- conf
+          |-- data
+          |-- logs
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br></div></div><h2 id="数据库"><a href="#数据库" class="header-anchor">#</a> 数据库</h2> <h3 id="拉取-mysql-镜像"><a href="#拉取-mysql-镜像" class="header-anchor">#</a> 拉取 MySQL 镜像</h3> <p><strong>注意：</strong>  MySQL 版本需与项目中使用的版本相对应</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token function">docker</span> pull mysql:8.0.28
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><h3 id="启动-mysql-容器"><a href="#启动-mysql-容器" class="header-anchor">#</a> 启动 MySQL 容器</h3> <p>切换到 <strong>mysql</strong> 目录下，执行以下命令，启动容器。执行成功后会在当前目录下创建 <strong>conf</strong>、<strong>data</strong>、<strong>logs</strong> 三个文件夹</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token function">docker</span> run <span class="token parameter variable">-p</span> <span class="token number">3306</span>:3306 <span class="token parameter variable">--name</span> mysql <span class="token punctuation">\</span>
+<span class="token parameter variable">--restart</span><span class="token operator">=</span>always <span class="token punctuation">\</span>
+<span class="token parameter variable">--privileged</span><span class="token operator">=</span>true <span class="token punctuation">\</span>
+<span class="token parameter variable">-v</span> <span class="token environment constant">$PWD</span>/conf/:/etc/mysql/conf.d <span class="token punctuation">\</span> 
+<span class="token parameter variable">-v</span> <span class="token environment constant">$PWD</span>/logs:/logs <span class="token punctuation">\</span>
+<span class="token parameter variable">-v</span> <span class="token environment constant">$PWD</span>/data:/var/lib/mysql <span class="token punctuation">\</span>
+<span class="token parameter variable">-e</span> <span class="token assign-left variable">TZ</span><span class="token operator">=</span>Asia/Shanghai <span class="token punctuation">\</span>
+<span class="token parameter variable">-e</span> <span class="token assign-left variable">MYSQL_ROOT_PASSWORD</span><span class="token operator">=</span><span class="token number">123456</span> <span class="token punctuation">\</span>
+<span class="token parameter variable">-d</span> mysql:8.0.28
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><p>如果需要额外配置 MySQL，可以在 <strong>conf</strong> 目录下添加 my.cnf 配置文件，然后重新启动容器（命令如下）</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token function">docker</span> restat mysql<span class="token punctuation">(</span>容器id<span class="token punctuation">)</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>my.cnf 配置文件</p> <div class="language-ini line-numbers-mode"><pre class="language-ini"><code><span class="token section"><span class="token punctuation">[</span><span class="token section-name selector">client</span><span class="token punctuation">]</span></span>
+<span class="token key attr-name">port</span> <span class="token punctuation">=</span> <span class="token value attr-value">3306</span>
+<span class="token section"><span class="token punctuation">[</span><span class="token section-name selector">mysqld</span><span class="token punctuation">]</span></span>
+<span class="token comment"># Mysql服务的唯一编号 每个mysql服务Id需唯一</span>
+<span class="token key attr-name">server-id</span> <span class="token punctuation">=</span> <span class="token value attr-value">1</span>
+​
+<span class="token comment"># 服务端口号 默认3306</span>
+<span class="token key attr-name">port</span> <span class="token punctuation">=</span> <span class="token value attr-value">3306</span>
+​
+<span class="token comment"># mysql安装根目录</span>
+<span class="token key attr-name">basedir</span> <span class="token punctuation">=</span> <span class="token value attr-value">/usr/local/mysql</span>
+​
+<span class="token comment"># mysql数据文件所在位置</span>
+<span class="token key attr-name">datadir</span> <span class="token punctuation">=</span> <span class="token value attr-value">/usr/local/mysql/data</span>
+​
+<span class="token key attr-name">secure-file-priv</span><span class="token punctuation">=</span> <span class="token value attr-value">/var/lib/mysql</span>
+​
+<span class="token comment"># 允许访问的IP网段</span>
+<span class="token key attr-name">bind-address</span> <span class="token punctuation">=</span> <span class="token value attr-value">0.0.0.0</span>
+​
+<span class="token comment"># 只能用IP地址检查客户端的登录，不用主机名</span>
+<span class="token key attr-name">skip_name_resolve</span> <span class="token punctuation">=</span> <span class="token value attr-value">1</span>
+​
+<span class="token comment"># 数据库默认字符集,主流字符集支持一些特殊表情符号（特殊表情符占用4个字节）</span>
+<span class="token key attr-name">character-set-server</span> <span class="token punctuation">=</span> <span class="token value attr-value">utf8mb4</span>
+​
+<span class="token comment"># 数据库字符集对应一些排序等规则，注意要和character-set-server对应</span>
+<span class="token key attr-name">collation-server</span> <span class="token punctuation">=</span> <span class="token value attr-value">utf8mb4_general_ci</span>
+​
+<span class="token comment"># 设置client连接mysql时的字符集,防止乱码</span>
+<span class="token key attr-name">init_connect</span><span class="token punctuation">=</span><span class="token value attr-value">'<span class="token inner-value">SET NAMES utf8mb4</span>'</span>
+​
+<span class="token comment"># 是否对sql语句大小写敏感，1表示不敏感</span>
+<span class="token key attr-name">lower_case_table_names</span> <span class="token punctuation">=</span> <span class="token value attr-value">1</span>
+​
+<span class="token comment"># 最大连接数</span>
+<span class="token key attr-name">max_connections</span> <span class="token punctuation">=</span> <span class="token value attr-value">400</span>
+​
+<span class="token comment"># 最大错误连接数</span>
+<span class="token key attr-name">max_connect_errors</span> <span class="token punctuation">=</span> <span class="token value attr-value">1000</span>
+​
+<span class="token comment"># TIMESTAMP如果没有显示声明NOT NULL，允许NULL值</span>
+<span class="token key attr-name">explicit_defaults_for_timestamp</span> <span class="token punctuation">=</span> <span class="token value attr-value">true</span>
+​
+<span class="token comment"># SQL数据包发送的大小，如果有BLOB对象建议修改成1G</span>
+<span class="token key attr-name">max_allowed_packet</span> <span class="token punctuation">=</span> <span class="token value attr-value">128M</span>
+​
+​
+<span class="token comment"># MySQL连接闲置超过一定时间后(单位：秒)将会被强行关闭</span>
+<span class="token comment"># MySQL默认的wait_timeout  值为8个小时, interactive_timeout参数需要同时配置才能生效</span>
+<span class="token key attr-name">interactive_timeout</span> <span class="token punctuation">=</span> <span class="token value attr-value">1800</span>
+<span class="token key attr-name">wait_timeout</span> <span class="token punctuation">=</span> <span class="token value attr-value">1800</span>
+​
+<span class="token comment"># 内部内存临时表的最大值，设置成128M。</span>
+<span class="token comment"># 比如大数据量的group by,order by时可能用到临时表，</span>
+<span class="token comment"># 超过了这个值将写入磁盘，系统IO压力增大</span>
+<span class="token key attr-name">tmp_table_size</span> <span class="token punctuation">=</span> <span class="token value attr-value">134217728</span>
+<span class="token key attr-name">max_heap_table_size</span> <span class="token punctuation">=</span> <span class="token value attr-value">134217728</span>
+​
+<span class="token comment"># 慢查询sql日志设置</span>
+<span class="token key attr-name">slow_query_log</span> <span class="token punctuation">=</span> <span class="token value attr-value">1</span>
+<span class="token key attr-name">slow_query_log_file</span> <span class="token punctuation">=</span> <span class="token value attr-value">slow.log</span>
+​
+<span class="token comment"># 检查未使用到索引的sql</span>
+<span class="token key attr-name">log_queries_not_using_indexes</span> <span class="token punctuation">=</span> <span class="token value attr-value">1</span>
+​
+<span class="token comment"># 针对log_queries_not_using_indexes开启后，记录慢sql的频次、每分钟记录的条数</span>
+<span class="token key attr-name">log_throttle_queries_not_using_indexes</span> <span class="token punctuation">=</span> <span class="token value attr-value">5</span>
+​
+<span class="token comment"># 慢查询执行的秒数，必须达到此值可被记录</span>
+<span class="token key attr-name">long_query_time</span> <span class="token punctuation">=</span> <span class="token value attr-value">8</span>
+​
+<span class="token comment"># 检索的行数必须达到此值才可被记为慢查询</span>
+<span class="token key attr-name">min_examined_row_limit</span> <span class="token punctuation">=</span> <span class="token value attr-value">100</span>
+​
+<span class="token comment"># mysql binlog日志文件保存的过期时间，过期后自动删除</span>
+<span class="token key attr-name">binlog_expire_logs_seconds</span> <span class="token punctuation">=</span> <span class="token value attr-value">604800</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br></div></div><p>至此，数据库部署完成。之后可以使用 Navicat 连接数据库将本地数据库中的数据同步过来。</p> <h2 id="制作-jdk17-镜像"><a href="#制作-jdk17-镜像" class="header-anchor">#</a> 制作 JDK17 镜像</h2> <h3 id="下载-jdk"><a href="#下载-jdk" class="header-anchor">#</a> 下载 JDK</h3> <p>项目使用的 JDK 版本为 17.0.5。<a href="https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html" target="_blank" rel="noopener noreferrer">下载<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>对应的版本，上传到 <strong>jdk</strong> 目录下，并解压。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0c46a80ffece48b0aa85d092fa1a7487~tplv-k3u1fbpfcp-zoom-1.image" alt="image-20230128185346114.png"></p> <h3 id="编写-dockerfile-文件"><a href="#编写-dockerfile-文件" class="header-anchor">#</a> 编写 Dockerfile 文件</h3> <div class="language-Dockerfile line-numbers-mode"><pre class="language-dockerfile"><code><span class="token comment"># 基础镜像</span>
+<span class="token instruction"><span class="token keyword">FROM</span> ubuntu:20.04</span>
+<span class="token comment"># 更新软件源</span>
+<span class="token instruction"><span class="token keyword">RUN</span> apt-get update</span>
+<span class="token comment"># 安装字体支持</span>
+<span class="token instruction"><span class="token keyword">RUN</span> apt-get install -y fontconfig</span>
+<span class="token comment"># 清理缓存</span>
+<span class="token instruction"><span class="token keyword">RUN</span> apt-get clean</span>
+<span class="token comment"># 添加JDK17，并解压在/usr/local/jdk</span>
+<span class="token instruction"><span class="token keyword">COPY</span> ./jdk-17.0.5 /usr/local/jdk</span>
+<span class="token comment"># 配置jdk17 环境变量</span>
+<span class="token instruction"><span class="token keyword">ENV</span> JAVA_HOME /usr/local/jdk</span>
+<span class="token instruction"><span class="token keyword">ENV</span> PATH=<span class="token variable">$JAVA_HOME</span>/bin:<span class="token variable">$PATH</span></span>
+<span class="token comment"># 设置系统编码</span>
+<span class="token instruction"><span class="token keyword">ENV</span> LANG C.UTF-8</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><h3 id="构建-jdk-镜像"><a href="#构建-jdk-镜像" class="header-anchor">#</a> 构建 JDK 镜像</h3> <p>在当前目录（<strong>jdk</strong>）下执行如下命令</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token function">docker</span> build <span class="token parameter variable">-t</span> jdk_17.0.5 <span class="token builtin class-name">.</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>至此，JDK 环境镜像构建完成。</p> <h2 id="后端"><a href="#后端" class="header-anchor">#</a> 后端</h2> <p>使用 Maven 将项目打成 jar 包，并上传到服务器 <strong>back</strong> 目录下。<strong>注意修改项目的数据库配置。</strong></p> <h3 id="编写-dockerfile-文件-2"><a href="#编写-dockerfile-文件-2" class="header-anchor">#</a> 编写 Dockerfile 文件</h3> <div class="language-Dockerfile line-numbers-mode"><pre class="language-dockerfile"><code><span class="token comment"># 基础镜像（上面我们构建的JDK镜像）</span>
+<span class="token instruction"><span class="token keyword">FROM</span> jdk_17.0.5</span>
+<span class="token comment"># 添加springboot jar 包 指定别名为 core.jar</span>
+<span class="token instruction"><span class="token keyword">ADD</span> core-0.0.1-SNAPSHOT.jar core.jar</span>
+​
+<span class="token instruction"><span class="token keyword">EXPOSE</span> 9998</span>
+​
+<span class="token comment"># 启动容器时运行jar包</span>
+<span class="token instruction"><span class="token keyword">ENTRYPOINT</span> [<span class="token string">&quot;java&quot;</span>,<span class="token string">&quot;-jar&quot;</span>,<span class="token string">&quot;-Duser.timezone=GMT+8&quot;</span>,<span class="token string">&quot;/core.jar&quot;</span>]</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><h3 id="启动容器"><a href="#启动容器" class="header-anchor">#</a> 启动容器</h3> <p>使用 Docker Compose 构建镜像和启动容器</p> <ol><li>编写 docker-compose.yaml 文件</li></ol> <div class="language-yaml line-numbers-mode"><pre class="language-yaml"><code><span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token string">'3.3'</span>
+<span class="token key atrule">services</span><span class="token punctuation">:</span> <span class="token comment"># 可以指定多个服务</span>
+    mall<span class="token punctuation">:</span> <span class="token comment"># 这个名字随便起 只要有意义</span>
+      build<span class="token punctuation">:</span>
+        context<span class="token punctuation">:</span> ./   <span class="token comment"># Dockerfile 文件位置</span>
+      restart<span class="token punctuation">:</span> always <span class="token comment"># 自动开机启动</span>
+      image<span class="token punctuation">:</span> mall<span class="token punctuation">:</span>latest  <span class="token comment"># 镜像名称</span>
+      container_name<span class="token punctuation">:</span> mall <span class="token comment"># 容器名称</span>
+      networks<span class="token punctuation">:</span>
+         <span class="token punctuation">-</span> mall<span class="token punctuation">-</span>network
+      ports<span class="token punctuation">:</span> <span class="token comment"># 指定端口 可以是多个</span>
+         <span class="token punctuation">-</span> 9998<span class="token punctuation">:</span><span class="token number">9998</span>
+<span class="token key atrule">networks</span><span class="token punctuation">:</span>
+  <span class="token key atrule">mall-network</span><span class="token punctuation">:</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div><ol start="2"><li>启动容器</li></ol> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token function">docker-compose</span> up <span class="token parameter variable">-d</span> <span class="token parameter variable">--build</span>  // 根据Dockerfile的最新内容来构建镜像并启动容器
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><ol start="3"><li>验证</li></ol> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token function">docker</span> <span class="token function">ps</span> // 查看启动的容器列表
+<span class="token function">docker</span> logs <span class="token parameter variable">-f</span> mall<span class="token punctuation">(</span>容器id<span class="token punctuation">)</span>  // 查看日志
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>至此后端部署完成。之后更新服务只需要把 jar 包上传到  <strong>back</strong> 目录下，执行<code>docker-compose up -d --build</code>命令即可</p> <h2 id="前端"><a href="#前端" class="header-anchor">#</a> 前端</h2> <h3 id="项目打包"><a href="#项目打包" class="header-anchor">#</a> 项目打包</h3> <p>执行如下命令，生成 <strong>dist</strong> 文件夹，并上传到服务器 <strong>web</strong> 目录下。<strong>注意修改请求的后端地址。</strong></p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token function">npm</span> run build  
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><h3 id="编写-nginx-conf-配置文件"><a href="#编写-nginx-conf-配置文件" class="header-anchor">#</a> 编写 nginx.conf 配置文件</h3> <p>前端项目部署到 Nginx 上，需要对 Nginx 进行配置</p> <div class="language-conf line-numbers-mode"><pre class="language-text"><code>worker_processes auto;
+​
+events {
+    worker_connections  1024;
+}
+​
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+​
+    sendfile        on;
+    #tcp_nopush     on;
+​
+    #keepalive_timeout  0;
+    keepalive_timeout  65;
+​
+    #gzip  on;
+​
+    client_max_body_size   20m;
+    server {
+        listen       9527;
+        location / {
+          root   /usr/share/nginx/html;
+          index  index.html index.htm;
+          try_files $uri $uri/ /index.html;
+        }
+        location /api {
+          proxy_pass http://192.168.107.65:9998;
+          rewrite &quot;^/api/(.*)$&quot; /$1 break;
+        }
+        #error_page  404              /404.html;
+​
+        # redirect server error pages to the static page /50x.html
+        #
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   html;
+        }
+    }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br></div></div><h3 id="编写-dockerfile-文件-3"><a href="#编写-dockerfile-文件-3" class="header-anchor">#</a> 编写 Dockerfile 文件</h3> <div class="language-Dockerfile line-numbers-mode"><pre class="language-dockerfile"><code><span class="token comment"># 设置基础镜像</span>
+<span class="token instruction"><span class="token keyword">FROM</span> nginx</span>
+<span class="token comment"># 将 dist 文件中的内容复制到 /usr/share/nginx/html/ 这个目录下面</span>
+<span class="token instruction"><span class="token keyword">COPY</span> dist/  /usr/share/nginx/html/</span>
+<span class="token instruction"><span class="token keyword">RUN</span> rm /etc/nginx/nginx.conf</span>
+<span class="token instruction"><span class="token keyword">COPY</span> ./nginx.conf /etc/nginx/nginx.conf</span>
+<span class="token instruction"><span class="token keyword">RUN</span> echo <span class="token string">'echo init ok!!'</span></span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><h3 id="启动容器-2"><a href="#启动容器-2" class="header-anchor">#</a> 启动容器</h3> <p>使用 Docker Compose 构建镜像和启动容器</p> <ol><li>编写 docker-compose.yaml 文件</li></ol> <div class="language-yaml line-numbers-mode"><pre class="language-yaml"><code><span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token string">'3.3'</span>
+<span class="token key atrule">services</span><span class="token punctuation">:</span> <span class="token comment"># 可以指定多个服务</span>
+    mall<span class="token punctuation">-</span><span class="token key atrule">web</span><span class="token punctuation">:</span> <span class="token comment">#这个名字随便起 只要有意义</span>
+      build<span class="token punctuation">:</span>
+        context<span class="token punctuation">:</span> ./
+      restart<span class="token punctuation">:</span> always <span class="token comment"># 自动开机启动</span>
+      image<span class="token punctuation">:</span> mall<span class="token punctuation">-</span>web<span class="token punctuation">:</span>latest <span class="token comment"># 基于哪个镜像</span>
+      container_name<span class="token punctuation">:</span> mall<span class="token punctuation">-</span>web <span class="token comment">#容器名称</span>
+      privileged<span class="token punctuation">:</span> <span class="token boolean important">true</span>
+      networks<span class="token punctuation">:</span>
+         <span class="token punctuation">-</span> mall<span class="token punctuation">-</span>web<span class="token punctuation">-</span>network
+      ports<span class="token punctuation">:</span> <span class="token comment"># 指定端口 可以是多个</span>
+         <span class="token punctuation">-</span> 9527<span class="token punctuation">:</span><span class="token number">9527</span>
+<span class="token key atrule">networks</span><span class="token punctuation">:</span>
+  <span class="token key atrule">mall-web-network</span><span class="token punctuation">:</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><ol start="2"><li>启动服务</li></ol> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token function">docker-compose</span> up <span class="token parameter variable">-d</span> <span class="token parameter variable">--build</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><ol start="3"><li>验证</li></ol> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token function">docker</span> <span class="token function">ps</span> // 查看启动的容器列表
+<span class="token function">docker</span> logs <span class="token parameter variable">-f</span> mall-web<span class="token punctuation">(</span>容器id<span class="token punctuation">)</span>  // 查看日志
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>至此，前端部署完成，可以通过浏览器进行访问来验证功能。</p> <h2 id="问题"><a href="#问题" class="header-anchor">#</a> 问题</h2> <p>1、每次重启电脑或者 WSL2 后，WSL2 子系统的 IP 地址就会发生改变</p> <ul><li>解决方法：<a href="https://blog.csdn.net/manbu_cy/article/details/108476859" target="_blank" rel="noopener noreferrer">WSL2 固定 IP 地址<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul> <p>附：我自己的 bat 脚本（管理员身份运行）</p> <div class="language-bat line-numbers-mode"><pre class="language-text"><code>@echo off
+setlocal enabledelayedexpansion
+​
+::先停掉可能在跑的wsl实例
+wsl --shutdown ubuntu
+::重新拉起来，并且用root的身份，启动docker服务
+wsl -u root service docker start
+if !errorlevel! equ 0 (
+    echo docker start success
+    :: 看看我要的IP在不在
+    wsl -u root ip addr | findstr &quot;192.168.107.65&quot; &gt; nul
+    if !errorlevel! equ 0 (
+        echo wsl ip has set
+    ) else (
+        ::不在的话给安排上
+        wsl -u root ip addr add 192.168.107.65/24 broadcast 192.168.107.0 dev eth0 label eth0:1
+        echo set wsl ip success: 192.168.107.65
+    )
+​
+​
+    ::windows作为wsl的宿主，在wsl的固定IP的同一网段也给安排另外一个IP
+    ipconfig | findstr &quot;192.168.107.100&quot; &gt; nul
+    if !errorlevel! equ 0 (
+        echo windows ip has set
+    ) else (
+        netsh interface ip add address &quot;vEthernet (WSL)&quot; 192.168.107.100 255.255.255.0
+        echo set windows ip success: 192.168.107.100
+    )
+)
+pause
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br></div></div><p>2、WSL2 固定 IP 地址后，ping 不通外网，Dockerfile 拉取镜像失败</p> <ul><li>解决方法：服务器上执行下面的命令。<a href="https://blog.csdn.net/weixin_43577131/article/details/119279749" target="_blank" rel="noopener noreferrer">参考文章<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token function">sudo</span> <span class="token function">rm</span> /etc/resolv.conf
+<span class="token function">sudo</span> <span class="token function">bash</span> <span class="token parameter variable">-c</span> <span class="token string">'echo &quot;nameserver 8.8.8.8&quot; &gt; /etc/resolv.conf'</span>
+<span class="token function">sudo</span> <span class="token function">bash</span> <span class="token parameter variable">-c</span> <span class="token string">'echo &quot;[network]&quot; &gt; /etc/wsl.conf'</span>
+<span class="token function">sudo</span> <span class="token function">bash</span> <span class="token parameter variable">-c</span> <span class="token string">'echo &quot;generateResolvConf = false&quot; &gt;&gt; /etc/wsl.conf'</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div></div></section> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev"><a href="/backend/docker/Elasticsearch.html" class="prev">
+          使用 Docker Compose 部署 Elasticsearch + Kibana
+        </a></span> <!----></p></div> <div class="comments-wrapper" style="display:none;"><!----></div></main></div> <!----></div> <ul class="sub-sidebar sub-sidebar-wrapper" style="width:12rem;" data-v-b57cc07c data-v-7dd95ae2><li class="level-2" data-v-b57cc07c><a href="/backend/docker/Web.html#服务器目录结构" class="sidebar-link reco-side-服务器目录结构" data-v-b57cc07c>服务器目录结构</a></li><li class="level-2" data-v-b57cc07c><a href="/backend/docker/Web.html#数据库" class="sidebar-link reco-side-数据库" data-v-b57cc07c>数据库</a></li><li class="level-3" data-v-b57cc07c><a href="/backend/docker/Web.html#拉取-mysql-镜像" class="sidebar-link reco-side-拉取-mysql-镜像" data-v-b57cc07c>拉取 MySQL 镜像</a></li><li class="level-3" data-v-b57cc07c><a href="/backend/docker/Web.html#启动-mysql-容器" class="sidebar-link reco-side-启动-mysql-容器" data-v-b57cc07c>启动 MySQL 容器</a></li><li class="level-2" data-v-b57cc07c><a href="/backend/docker/Web.html#制作-jdk17-镜像" class="sidebar-link reco-side-制作-jdk17-镜像" data-v-b57cc07c>制作 JDK17 镜像</a></li><li class="level-3" data-v-b57cc07c><a href="/backend/docker/Web.html#下载-jdk" class="sidebar-link reco-side-下载-jdk" data-v-b57cc07c>下载 JDK</a></li><li class="level-3" data-v-b57cc07c><a href="/backend/docker/Web.html#编写-dockerfile-文件" class="sidebar-link reco-side-编写-dockerfile-文件" data-v-b57cc07c>编写 Dockerfile 文件</a></li><li class="level-3" data-v-b57cc07c><a href="/backend/docker/Web.html#构建-jdk-镜像" class="sidebar-link reco-side-构建-jdk-镜像" data-v-b57cc07c>构建 JDK 镜像</a></li><li class="level-2" data-v-b57cc07c><a href="/backend/docker/Web.html#后端" class="sidebar-link reco-side-后端" data-v-b57cc07c>后端</a></li><li class="level-3" data-v-b57cc07c><a href="/backend/docker/Web.html#编写-dockerfile-文件-2" class="sidebar-link reco-side-编写-dockerfile-文件-2" data-v-b57cc07c>编写 Dockerfile 文件</a></li><li class="level-3" data-v-b57cc07c><a href="/backend/docker/Web.html#启动容器" class="sidebar-link reco-side-启动容器" data-v-b57cc07c>启动容器</a></li><li class="level-2" data-v-b57cc07c><a href="/backend/docker/Web.html#前端" class="sidebar-link reco-side-前端" data-v-b57cc07c>前端</a></li><li class="level-3" data-v-b57cc07c><a href="/backend/docker/Web.html#项目打包" class="sidebar-link reco-side-项目打包" data-v-b57cc07c>项目打包</a></li><li class="level-3" data-v-b57cc07c><a href="/backend/docker/Web.html#编写-nginx-conf-配置文件" class="sidebar-link reco-side-编写-nginx-conf-配置文件" data-v-b57cc07c>编写 nginx.conf 配置文件</a></li><li class="level-3" data-v-b57cc07c><a href="/backend/docker/Web.html#编写-dockerfile-文件-3" class="sidebar-link reco-side-编写-dockerfile-文件-3" data-v-b57cc07c>编写 Dockerfile 文件</a></li><li class="level-3" data-v-b57cc07c><a href="/backend/docker/Web.html#启动容器-2" class="sidebar-link reco-side-启动容器-2" data-v-b57cc07c>启动容器</a></li><li class="level-2" data-v-b57cc07c><a href="/backend/docker/Web.html#问题" class="sidebar-link reco-side-问题" data-v-b57cc07c>问题</a></li></ul></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div><!----></div></div>
+    <script src="/assets/js/app.37ed7473.js" defer></script><script src="/assets/js/3.a7eca6c4.js" defer></script><script src="/assets/js/1.d4cddd66.js" defer></script><script src="/assets/js/14.deee688e.js" defer></script><script src="/assets/js/10.90017dd4.js" defer></script>
+  </body>
+</html>
